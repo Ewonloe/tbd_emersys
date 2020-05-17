@@ -17,6 +17,8 @@ dependencies {
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
+    compile group: 'org.sql2o', name: 'sql2o', version: '1.6.0'
+    compile 'org.postgresql:postgresql:42.2.5'
 }
 
 test {
