@@ -33,24 +33,21 @@ public class VoluntarioService {
     @ResponseBody
     public Voluntario createVoluntario(@RequestBody Voluntario voluntario)
     {
-        Voluntario vol = volRepo.createVoluntario(voluntario);
-        return vol;
+        return volRepo.createVoluntario(voluntario);
     }
 
 
     @GetMapping("/voluntarios/{id}")
     public Voluntario getVoluntario(@PathVariable(value = "id") Integer id)
     {
-        Voluntario vol = volRepo.getVoluntario(id);
-        return vol;
+        return volRepo.getVoluntario(id);
     }
 
-    @PutMapping("voluntarios/update/{id}")
+    @PutMapping("/voluntarios/update/{id}")
     @ResponseBody
     public Voluntario updateVoluntario(@RequestBody Voluntario voluntario, @PathVariable(value = "id") Integer id)
     {
-        Voluntario vol = volRepo.updateVoluntario(voluntario, id);
-        return vol;
+        return volRepo.updateVoluntario(voluntario, id);
     }
 
     @DeleteMapping("/voluntarios/delete/{id}")

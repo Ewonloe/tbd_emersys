@@ -1,13 +1,12 @@
 package tbd.lab.Models;
 
 import java.math.BigDecimal;
-import java.sql.Date;
 
-public class Voluntario {
+public class Institucion {
 
     private BigDecimal id;
     private String nombre;
-    private Date fnacimiento;
+    private String descrip;
 
     public BigDecimal getId() {
         return id;
@@ -25,14 +24,13 @@ public class Voluntario {
         this.nombre = nombre;
     }
 
-    public Date getFnacimiento() {
-        return fnacimiento;
+    public String getDescrip() {
+        return descrip;
     }
 
-    public void setFnacimiento(Date fnacimiento) {
-        this.fnacimiento = fnacimiento;
+    public void setDescrip(String descrip) {
+        this.descrip = descrip;
     }
-
 
 
 }
