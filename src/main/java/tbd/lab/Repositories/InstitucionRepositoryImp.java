@@ -47,19 +47,18 @@ public class InstitucionRepositoryImp implements InstitucionRepository{
     }
 
     @Override
-    public Institucion createInstitucion(Institucion institucion)
+    public String createInstitucion(Institucion institucion)
     {
         String sql = "INSERT INTO institucion (nombre, descrip) VALUES (:insName, :insDesc)";
 
         try(Connection conn = sql2o.open())
         {
-            BigDecimal insertedID = (BigDecimal) conn.createQuery(sql, true)
+            conn.createQuery(sql, true)
                     .addParameter("insName", institucion.getNombre())
                     .addParameter("insDesc", institucion.getDescrip())
                     .executeUpdate().getKey();
 
-            institucion.setId(insertedID);
-            return institucion;
+            return "Institucion creada con exito";
         }
 
         catch (Exception e)
@@ -87,18 +86,19 @@ public class InstitucionRepositoryImp implements InstitucionRepository{
     }
 
     @Override
-    public Institucion updateInstitucion(Institucion institucion, Integer id)
+    public String updateInstitucion(Institucion institucion, Integer id)
     {
+        String sql = "UPDATE institucion SET nombre = :insName, descrip = :insDesc WHERE id = :insId";
+
         try (Connection conn = sql2o.open())
         {
-            BigDecimal insertedId = (BigDecimal) conn.createQuery("UPDATE institucion SET nombre = :insName, descrip = :insDesc WHERE id = :insId")
+            conn.createQuery(sql)
                     .addParameter("insName", institucion.getNombre())
                     .addParameter("insDesc", institucion.getDescrip())
                     .addParameter("insId", id)
                     .executeUpdate().getKey();
 
-            institucion.setId(insertedId);
-            return institucion;
+            return "Institucion actualizada con exito";
         }
 
         catch (Exception e)
@@ -109,18 +109,21 @@ public class InstitucionRepositoryImp implements InstitucionRepository{
     }
 
     @Override
-    public void deleteInstitucion(Integer id)
+    public String deleteInstitucion(Integer id)
     {
         try(Connection conn = sql2o.open()) {
 
             conn.createQuery("DELETE FROM institucion WHERE id = :insId")
                     .addParameter("insId", id)
                     .executeUpdate();
+
+            return "Institucion eliminada con exito";
         }
 
         catch (Exception e)
         {
             System.out.println(e.getMessage());
+            return null;
         }
     }
 

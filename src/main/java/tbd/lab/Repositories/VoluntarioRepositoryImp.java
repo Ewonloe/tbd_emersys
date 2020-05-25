@@ -47,19 +47,18 @@ public class VoluntarioRepositoryImp implements VoluntarioRepository{
     }
 
     @Override
-    public Voluntario createVoluntario(Voluntario voluntario)
+    public String createVoluntario(Voluntario voluntario)
     {
         String sql = "INSERT INTO voluntario (nombre, fnacimiento) VALUES (:volName, :volFnac)";
         try (Connection conn = sql2o.open())
         {
             //conn.getJdbcConnection().setAutoCommit(false);
-            BigDecimal insertedId = (BigDecimal) conn.createQuery(sql, true)
+            conn.createQuery(sql, true)
                     .addParameter("volName", voluntario.getNombre())
                     .addParameter("volFnac", voluntario.getFnacimiento())
                     .executeUpdate().getKey();
 
-            voluntario.setId(insertedId);
-            return voluntario;
+            return "Voluntario creado con exito";
         }
 
         catch (Exception e)
@@ -88,18 +87,17 @@ public class VoluntarioRepositoryImp implements VoluntarioRepository{
 
     // JSON debe incluir todos los atributos, no solo los que se piensan cambiar.
     @Override
-    public Voluntario updateVoluntario(Voluntario voluntario, Integer id)
+    public String updateVoluntario(Voluntario voluntario, Integer id)
     {
         try (Connection conn = sql2o.open())
         {
-            BigDecimal insertedId = (BigDecimal) conn.createQuery("UPDATE voluntario SET nombre = :volNombre, fnacimiento = :volFnac WHERE id = :volId")
+            conn.createQuery("UPDATE voluntario SET nombre = :volNombre, fnacimiento = :volFnac WHERE id = :volId")
                     .addParameter("volNombre", voluntario.getNombre())
                     .addParameter("volFnac", voluntario.getFnacimiento())
                     .addParameter("volId", id)
                     .executeUpdate().getKey();
 
-            voluntario.setId(insertedId);
-            return voluntario;
+            return "Voluntario actualizado con exito";
         }
 
         catch (Exception e)
@@ -110,18 +108,21 @@ public class VoluntarioRepositoryImp implements VoluntarioRepository{
     }
 
     @Override
-    public void deleteVoluntario(Integer id)
+    public String deleteVoluntario(Integer id)
     {
         try (Connection conn = sql2o.open())
         {
             conn.createQuery("DELETE FROM voluntario WHERE id = :volId")
                     .addParameter("volId", id)
                     .executeUpdate();
+
+            return "Voluntario eliminado con exito";
         }
 
         catch (Exception e)
         {
             System.out.println(e.getMessage());
+            return null;
         }
     }
 

@@ -31,7 +31,7 @@ public class InstitucionService {
 
     @PostMapping("/instituciones/add")
     @ResponseBody
-    public Institucion createInstitucion(@RequestBody Institucion institucion)
+    public String createInstitucion(@RequestBody Institucion institucion)
     {
         return insRepo.createInstitucion(institucion);
     }
@@ -44,7 +44,7 @@ public class InstitucionService {
 
     @PutMapping("/instituciones/update/{id}")
     @ResponseBody
-    public Institucion updateInstitucion(@RequestBody Institucion institucion, @PathVariable(value = "id") Integer id)
+    public String updateInstitucion(@RequestBody Institucion institucion, @PathVariable(value = "id") Integer id)
     {
         return insRepo.updateInstitucion(institucion, id);
     }
@@ -52,7 +52,6 @@ public class InstitucionService {
     @DeleteMapping("/instituciones/delete/{id}")
     public String deleteInstitucion(@PathVariable(value = "id") Integer id)
     {
-        insRepo.deleteInstitucion(id);
-        return "Institucion eliminada exitosamente";
+        return insRepo.deleteInstitucion(id);
     }
 }

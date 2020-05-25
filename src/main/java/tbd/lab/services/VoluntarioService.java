@@ -31,7 +31,7 @@ public class VoluntarioService {
 
     @PostMapping("/voluntarios/add")
     @ResponseBody
-    public Voluntario createVoluntario(@RequestBody Voluntario voluntario)
+    public String createVoluntario(@RequestBody Voluntario voluntario)
     {
         return volRepo.createVoluntario(voluntario);
     }
@@ -45,7 +45,7 @@ public class VoluntarioService {
 
     @PutMapping("/voluntarios/update/{id}")
     @ResponseBody
-    public Voluntario updateVoluntario(@RequestBody Voluntario voluntario, @PathVariable(value = "id") Integer id)
+    public String updateVoluntario(@RequestBody Voluntario voluntario, @PathVariable(value = "id") Integer id)
     {
         return volRepo.updateVoluntario(voluntario, id);
     }

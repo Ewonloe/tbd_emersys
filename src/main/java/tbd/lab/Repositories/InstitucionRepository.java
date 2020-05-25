@@ -7,8 +7,8 @@ import java.util.List;
 public interface InstitucionRepository {
     public int countInstitucion();
     public List<Institucion> getAllInstitucion();
-    public Institucion createInstitucion(Institucion institucion);
+    public String createInstitucion(Institucion institucion);
     public Institucion getInstitucion(Integer id);
-    public Institucion updateInstitucion(Institucion institucion, Integer id);
-    public void deleteInstitucion(Integer id);
+    public String updateInstitucion(Institucion institucion, Integer id);
+    public String deleteInstitucion(Integer id);
 }
