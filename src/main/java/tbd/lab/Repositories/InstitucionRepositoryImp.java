@@ -56,7 +56,7 @@ public class InstitucionRepositoryImp implements InstitucionRepository{
             conn.createQuery(sql, true)
                     .addParameter("insName", institucion.getNombre())
                     .addParameter("insDesc", institucion.getDescrip())
-                    .executeUpdate().getKey();
+                    .executeUpdate();
 
             return "Institucion creada con exito";
         }
@@ -96,7 +96,7 @@ public class InstitucionRepositoryImp implements InstitucionRepository{
                     .addParameter("insName", institucion.getNombre())
                     .addParameter("insDesc", institucion.getDescrip())
                     .addParameter("insId", id)
-                    .executeUpdate().getKey();
+                    .executeUpdate();
 
             return "Institucion actualizada con exito";
         }

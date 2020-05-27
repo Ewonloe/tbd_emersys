@@ -58,7 +58,7 @@ public class EmergenciaRepositoryImp implements EmergenciaRepository{
                     .addParameter("emerFinicio", emergencia.getFinicio())
                     .addParameter("emerFfin", emergencia.getFfin())
                     .addParameter("emerId_ins", emergencia.getId_institucion())
-                    .executeUpdate().getKey();
+                    .executeUpdate();
 
             return "Emergencia creada con exito";
         }
@@ -99,7 +99,7 @@ public class EmergenciaRepositoryImp implements EmergenciaRepository{
                     .addParameter("emerFfin", emergencia.getFfin())
                     .addParameter("emerId_ins", emergencia.getId_institucion())
                     .addParameter("emerId", id)
-                    .executeUpdate().getKey();
+                    .executeUpdate();
 
             return "Emergencia actualizada con exito";
         }

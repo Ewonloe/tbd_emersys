@@ -6,7 +6,6 @@ import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 import tbd.lab.Models.Voluntario;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 @Repository
@@ -56,7 +55,7 @@ public class VoluntarioRepositoryImp implements VoluntarioRepository{
             conn.createQuery(sql, true)
                     .addParameter("volName", voluntario.getNombre())
                     .addParameter("volFnac", voluntario.getFnacimiento())
-                    .executeUpdate().getKey();
+                    .executeUpdate();
 
             return "Voluntario creado con exito";
         }
@@ -95,7 +94,7 @@ public class VoluntarioRepositoryImp implements VoluntarioRepository{
                     .addParameter("volNombre", voluntario.getNombre())
                     .addParameter("volFnac", voluntario.getFnacimiento())
                     .addParameter("volId", id)
-                    .executeUpdate().getKey();
+                    .executeUpdate();
 
             return "Voluntario actualizado con exito";
         }

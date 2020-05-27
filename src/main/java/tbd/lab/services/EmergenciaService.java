@@ -43,6 +43,7 @@ public class EmergenciaService {
     }
 
     @PutMapping("/emergencias/update/{id}")
+    @ResponseBody
     public String updateEmergencia(@RequestBody Emergencia emergencia, @PathVariable(value = "id") Integer id)
     {
         return emerRepo.updateEmergencia(emergencia, id);
