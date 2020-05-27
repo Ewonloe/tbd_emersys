@@ -4,7 +4,6 @@ import org.springframework.web.bind.annotation.*;
 import tbd.lab.Models.Estado;
 import tbd.lab.Repositories.EstadoRepository;
 
-import java.nio.file.Path;
 import java.util.List;
 
 @CrossOrigin
