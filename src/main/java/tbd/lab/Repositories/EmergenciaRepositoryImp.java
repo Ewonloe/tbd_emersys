@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 import tbd.lab.Models.Emergencia;
+import tbd.lab.Models.Tarea;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -121,6 +122,23 @@ public class EmergenciaRepositoryImp implements EmergenciaRepository{
                     .executeUpdate();
 
             return "Emergencia eliminada con exito";
+        }
+
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
+
+    @Override
+    public List<Tarea> getTareas(Integer id)
+    {
+        try(Connection conn = sql2o.open())
+        {
+            return conn.createQuery("SELECT * FROM tarea WHERE id_emergencia = :id")
+                    .addParameter("id", id)
+                    .executeAndFetch(Tarea.class);
         }
 
         catch(Exception e)

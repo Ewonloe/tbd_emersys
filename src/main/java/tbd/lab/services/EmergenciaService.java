@@ -2,6 +2,7 @@ package tbd.lab.services;
 
 import org.springframework.web.bind.annotation.*;
 import tbd.lab.Models.Emergencia;
+import tbd.lab.Models.Tarea;
 import tbd.lab.Repositories.EmergenciaRepository;
 
 import java.util.List;
@@ -53,5 +54,11 @@ public class EmergenciaService {
     public String deleteEmergencia(@PathVariable(value = "id") Integer id)
     {
         return emerRepo.deleteEmergencia(id);
+    }
+
+    @GetMapping("/emergencias/getTareas/{id}")
+    public List<Tarea> getTareas(@PathVariable(value= "id") Integer id)
+    {
+        return emerRepo.getTareas(id);
     }
 }
