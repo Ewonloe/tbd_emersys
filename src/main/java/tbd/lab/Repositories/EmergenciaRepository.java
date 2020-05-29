@@ -1,6 +1,7 @@
 package tbd.lab.Repositories;
 
 import tbd.lab.Models.Emergencia;
+import tbd.lab.Models.Tarea;
 
 import java.util.List;
 
@@ -11,4 +12,5 @@ public interface EmergenciaRepository {
     public Emergencia getEmergencia(Integer id);
     public String updateEmergencia(Emergencia emergencia, Integer id);
     public String deleteEmergencia(Integer id);
+    public List<Tarea> getTareas(Integer id);
 }
