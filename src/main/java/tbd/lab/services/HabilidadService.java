@@ -9,8 +9,5 @@ import java.util.List;
 @CrossOrigin
 @RestController
 public class HabilidadService {
-    private final HabilidadRepository habiRepo {
-
-
-    }
+   // private final HabilidadRepository habiRepo{ }
 }

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 import tbd.lab.Models.Ranking;
+import tbd.lab.Models.Voluntario;
 
 import java.util.List;
 
@@ -127,4 +128,6 @@ public class RankingRepositoryImp implements RankingRepository{
             return null;
         }
     }
+
+
 }

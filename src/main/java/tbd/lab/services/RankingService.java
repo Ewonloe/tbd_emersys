@@ -2,6 +2,7 @@ package tbd.lab.services;
 import org.springframework.web.bind.annotation.*;
 import tbd.lab.Models.Ranking;
 import tbd.lab.Repositories.RankingRepository;
+import tbd.lab.Models.Voluntario;
 
 import java.util.List;
 

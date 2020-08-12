@@ -56,4 +56,8 @@ public class VoluntarioService {
         volRepo.deleteVoluntario(id);
         return "Voluntario eliminado exitosamente";
     }
+
+    @GetMapping("/voluntario/getVolWithRankingIn/{minValue}/and/{maxValue}")
+    public List<Voluntario> getRankingBetween(@PathVariable(value = "minValue") Float minValue, @PathVariable(value = "maxValue") Float maxValue)
+    {return volRepo.getRankingBetween(minValue, maxValue);}
 }

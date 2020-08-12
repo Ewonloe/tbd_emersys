@@ -125,4 +125,28 @@ public class VoluntarioRepositoryImp implements VoluntarioRepository{
         }
     }
 
+    @Override
+    public List<Voluntario> getRankingBetween(Float minValue, Float maxValue)
+    {
+        try(Connection conn = sql2o.open())
+        {
+            return conn.createQuery("SELECT * " +
+                    "FROM voluntario " +
+                    "WHERE id IN "+
+                    "(SELECT id_voluntario " +
+                    "FROM ranking " +
+                    "WHERE puntaje BETWEEN :minValue AND :maxValue)")
+                    .addParameter("minValue", minValue)
+                    .addParameter("maxValue", maxValue)
+                    .addColumnMapping("id_voluntario", "idVoluntario")
+                    .executeAndFetch(Voluntario.class);
+        }
+
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
+
 }

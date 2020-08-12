@@ -1,6 +1,8 @@
 package tbd.lab.Repositories;
 import java.util.List;
 import tbd.lab.Models.Ranking;
+import tbd.lab.Models.Voluntario;
+
 public interface RankingRepository {
     public int countRanking();
     public List<Ranking> getAllRanking();
