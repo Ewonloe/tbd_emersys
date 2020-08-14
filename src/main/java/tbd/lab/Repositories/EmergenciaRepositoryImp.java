@@ -7,7 +7,6 @@ import org.sql2o.Sql2o;
 import tbd.lab.Models.Emergencia;
 import tbd.lab.Models.Tarea;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 @Repository
@@ -139,6 +138,32 @@ public class EmergenciaRepositoryImp implements EmergenciaRepository{
             return conn.createQuery("SELECT * FROM tarea WHERE id_emergencia = :id")
                     .addParameter("id", id)
                     .executeAndFetch(Tarea.class);
+        }
+
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
+
+
+    public List<Emergencia> getRankingBetween(Integer id)
+    {
+        try(Connection conn = sql2o.open())
+        {
+            return conn.createQuery("SELECT AVG(id)" +
+"                   FROM ranking" +
+                "    WHERE id_voluntario IN" +
+                    ("SELECT id " +
+                    "FROM voluntario " +
+                    "WHERE id IN "+
+                    "(SELECT * " +
+                    "FROM tarea, tarea voluntario " +
+                    "WHERE id_emergencia = id"))
+                    .addParameter("idEmergencia", id)
+                    .addColumnMapping("prom_ranking", "prom_ranking")
+                    .executeAndFetch(Emergencia.class);
         }
 
         catch(Exception e)
