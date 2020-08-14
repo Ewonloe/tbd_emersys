@@ -51,7 +51,6 @@ public class VoluntarioRepositoryImp implements VoluntarioRepository{
         String sql = "INSERT INTO voluntario (nombre, fnacimiento) VALUES (:volName, :volFnac)";
         try (Connection conn = sql2o.open())
         {
-            //conn.getJdbcConnection().setAutoCommit(false);
             conn.createQuery(sql, true)
                     .addParameter("volName", voluntario.getNombre())
                     .addParameter("volFnac", voluntario.getFnacimiento())

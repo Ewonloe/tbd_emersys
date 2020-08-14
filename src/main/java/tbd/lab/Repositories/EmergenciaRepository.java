@@ -12,5 +12,7 @@ public interface EmergenciaRepository {
     public Emergencia getEmergencia(Integer id);
     public String updateEmergencia(Emergencia emergencia, Integer id);
     public String deleteEmergencia(Integer id);
+
+    // Listar tareas de la emergencia.
     public List<Tarea> getTareas(Integer id);
 }
