@@ -6,7 +6,7 @@ import java.sql.Date;
 public class Habilidad {
 
     private BigDecimal id;
-    private String descripcion;
+    private String descrip;
 
     public BigDecimal getId() {
         return id;
@@ -16,11 +16,11 @@ public class Habilidad {
         this.id = id;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public String getDescrip() {
+        return descrip;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setDescrip(String descrip) {
+        this.descrip = descrip;
     }
 }

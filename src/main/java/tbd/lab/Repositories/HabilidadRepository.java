@@ -10,7 +10,7 @@ public interface HabilidadRepository {
     public int countHabilidad();
     public List<Habilidad> getAllHabilidad();
     public String createHabilidad(Habilidad habilidad);
-    public Habilidad getEstado(Integer id);
-    public String updateEstado(Habilidad habilidad, Integer id);
-    public String deleteEstado(Integer id);
+    public Habilidad getHabilidad(Integer id);
+    public String updateHabilidad(Habilidad habilidad, Integer id);
+    public String deleteHabilidad(Integer id);
 }

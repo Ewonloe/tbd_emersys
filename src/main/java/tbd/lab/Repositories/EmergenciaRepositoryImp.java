@@ -147,24 +147,23 @@ public class EmergenciaRepositoryImp implements EmergenciaRepository{
         }
     }
 
-
-    public List<Emergencia> getRankingBetween(Integer id)
-    {
-        try(Connection conn = sql2o.open())
-        {
+    @Override
+    public List<Emergencia> getRankingAvg(Integer id) {
+        try (Connection conn = sql2o.open()) {
             return conn.createQuery("SELECT AVG(id)" +
-"                   FROM ranking" +
-                "    WHERE id_voluntario IN" +
+                    "                   FROM ranking" +
+                    "    WHERE id_voluntario IN" +
                     ("SELECT id " +
-                    "FROM voluntario " +
-                    "WHERE id IN "+
-                    "(SELECT * " +
-                    "FROM tarea, tarea voluntario " +
-                    "WHERE id_emergencia = id"))
+                            "FROM voluntario " +
+                            "WHERE id IN " +
+                            "(SELECT * " +
+                            "FROM tarea, tarea voluntario " +
+                            "WHERE id_emergencia = id"))
                     .addParameter("idEmergencia", id)
                     .addColumnMapping("prom_ranking", "prom_ranking")
                     .executeAndFetch(Emergencia.class);
         }
+
 
         catch(Exception e)
         {
