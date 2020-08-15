@@ -2,6 +2,7 @@ package tbd.lab.services;
 
 import org.springframework.web.bind.annotation.*;
 import tbd.lab.Models.Emergencia;
+import tbd.lab.Models.Habilidad;
 import tbd.lab.Models.Tarea;
 import tbd.lab.Repositories.EmergenciaRepository;
 
@@ -60,5 +61,11 @@ public class EmergenciaService {
     public List<Tarea> getTareas(@PathVariable(value= "id") Integer id)
     {
         return emerRepo.getTareas(id);
+    }
+
+    @GetMapping("/emergencias/getHabilidades/{id}")
+    public List<Habilidad> getHabilidades(@PathVariable(value= "id") Integer id)
+    {
+        return emerRepo.getHabilidades(id);
     }
 }

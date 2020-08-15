@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 import tbd.lab.Models.Emergencia;
+import tbd.lab.Models.Habilidad;
 import tbd.lab.Models.Tarea;
 
 import java.util.List;
@@ -138,6 +139,24 @@ public class EmergenciaRepositoryImp implements EmergenciaRepository{
             return conn.createQuery("SELECT * FROM tarea WHERE id_emergencia = :id")
                     .addParameter("id", id)
                     .executeAndFetch(Tarea.class);
+        }
+
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
+
+    @Override
+    public List<Habilidad> getHabilidades(Integer id)
+    {
+        String sql = "SELECT * FROM habilidad WHERE id IN (SELECT id_habilidad FROM eme_habilidad WHERE id_emergencia = :id)";
+        try(Connection conn = sql2o.open())
+        {
+            return conn.createQuery(sql)
+                    .addParameter("id", id)
+                    .executeAndFetch(Habilidad.class);
         }
 
         catch(Exception e)
