@@ -1,5 +1,6 @@
 package tbd.lab.Repositories;
 
+import tbd.lab.Models.Habilidad;
 import tbd.lab.Models.Tarea;
 
 import java.util.List;
@@ -11,4 +12,5 @@ public interface TareaRepository {
     public Tarea getTarea(Integer id);
     public String updateTarea(Tarea tarea, Integer id);
     public String deleteTarea(Integer id);
+    public List<Habilidad> getHabilidades(Integer id);
 }

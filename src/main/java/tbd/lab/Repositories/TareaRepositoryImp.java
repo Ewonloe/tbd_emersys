@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
+import tbd.lab.Models.Habilidad;
 import tbd.lab.Models.Tarea;
 
 import java.net.Inet4Address;
@@ -127,6 +128,27 @@ public class TareaRepositoryImp implements TareaRepository{
                     .executeUpdate();
 
             return "Tarea eliminada con exito";
+        }
+
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
+
+    @Override
+    public List<Habilidad> getHabilidades(Integer id)
+    {
+        String sql = "SELECT * FROM habilidad WHERE id IN " +
+                "(SELECT id_habilidad FROM eme_habilidad WHERE id IN " +
+                "(SELECT id_emehab FROM tarea_habilidad WHERE id_tarea = :id))";
+
+        try (Connection conn = sql2o.open())
+        {
+            return conn.createQuery(sql)
+                    .addParameter("id", id)
+                    .executeAndFetch(Habilidad.class);
         }
 
         catch (Exception e)

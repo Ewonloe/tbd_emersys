@@ -1,6 +1,7 @@
 package tbd.lab.services;
 
 import org.springframework.web.bind.annotation.*;
+import tbd.lab.Models.Habilidad;
 import tbd.lab.Models.Tarea;
 import tbd.lab.Repositories.TareaRepository;
 
@@ -53,6 +54,12 @@ public class TareaService {
     public String deleteTarea(@PathVariable(value = "id") Integer id)
     {
         return tarRepo.deleteTarea(id);
+    }
+
+    @GetMapping("/tareas/getHabilidades/{id}")
+    public List<Habilidad> getHabilidades(@PathVariable(value = "id") Integer id)
+    {
+        return tarRepo.getHabilidades(id);
     }
 
 
