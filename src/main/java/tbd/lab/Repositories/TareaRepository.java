@@ -13,4 +13,5 @@ public interface TareaRepository {
     public String updateTarea(Tarea tarea, Integer id);
     public String deleteTarea(Integer id);
     public List<Habilidad> getHabilidades(Integer id);
+    public List<Habilidad> getMissingHabilidades(Integer id);
 }

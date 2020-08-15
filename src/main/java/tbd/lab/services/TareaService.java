@@ -62,5 +62,11 @@ public class TareaService {
         return tarRepo.getHabilidades(id);
     }
 
+    @GetMapping("/tareas/getMissingHabilidades/{id}")
+    public List<Habilidad> getMissingHabilidades(@PathVariable(value = "id") Integer id)
+    {
+        return tarRepo.getMissingHabilidades(id);
+    }
+
 
 }
