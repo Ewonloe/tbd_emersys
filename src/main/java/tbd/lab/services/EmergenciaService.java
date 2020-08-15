@@ -74,4 +74,10 @@ public class EmergenciaService {
     {
         return emerRepo.getMissingHabilidades(id);
     }
+
+    @GetMapping("/emergencias/getRankingAvg/{id}")
+    public List<Emergencia> getRankingAvg(@PathVariable(value= "id") Integer id)
+    {
+        return emerRepo.getRankingAvg(id);
+    }
 }

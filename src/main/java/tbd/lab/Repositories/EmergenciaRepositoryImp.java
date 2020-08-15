@@ -201,7 +201,6 @@ public class EmergenciaRepositoryImp implements EmergenciaRepository{
                     .executeAndFetch(Emergencia.class);
         }
 
-
         catch(Exception e)
         {
             System.out.println(e.getMessage());
