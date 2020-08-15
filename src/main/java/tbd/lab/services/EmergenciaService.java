@@ -68,4 +68,10 @@ public class EmergenciaService {
     {
         return emerRepo.getHabilidades(id);
     }
+
+    @GetMapping("/emergencias/getMissingHabilidades/{id}")
+    public List<Habilidad> getMissingHabilidades(Integer id)
+    {
+        return emerRepo.getMissingHabilidades(id);
+    }
 }

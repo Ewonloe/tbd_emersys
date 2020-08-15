@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 public class Tarea_habilidad {
 
     private BigDecimal id;
-    private BigDecimal id_habilidad;
+    private BigDecimal id_emeHabilidad;
     private BigDecimal id_tarea;
 
     public BigDecimal getId() {
@@ -16,12 +16,12 @@ public class Tarea_habilidad {
         this.id = id;
     }
 
-    public BigDecimal getId_habilidad() {
-        return id_habilidad;
+    public BigDecimal getId_emeHabilidad() {
+        return id_emeHabilidad;
     }
 
-    public void setId_habilidad(BigDecimal id_habilidad) {
-        this.id_habilidad = id_habilidad;
+    public void setId_emeHabilidad(BigDecimal id_emeHabilidad) {
+        this.id_emeHabilidad = id_emeHabilidad;
     }
 
     public BigDecimal getId_tarea() {

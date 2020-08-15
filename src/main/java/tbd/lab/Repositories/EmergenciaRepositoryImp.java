@@ -166,6 +166,23 @@ public class EmergenciaRepositoryImp implements EmergenciaRepository{
         }
     }
 
+    public List<Habilidad> getMissingHabilidades(Integer id)
+    {
+        String sql = "SELECT * FROM habilidad WHERE id NOT IN (SELECT id_habilidad FROM eme_habilidad WHERE id_emergencia = :id)";
+        try(Connection conn = sql2o.open())
+        {
+            return conn.createQuery(sql)
+                    .addParameter("id", id)
+                    .executeAndFetch(Habilidad.class);
+        }
+
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
+
     @Override
     public List<Emergencia> getRankingAvg(Integer id) {
         try (Connection conn = sql2o.open()) {

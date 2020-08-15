@@ -18,6 +18,7 @@ public interface EmergenciaRepository {
     public List<Tarea> getTareas(Integer id);
 
     public List<Habilidad> getHabilidades(Integer id);
+    public List<Habilidad> getMissingHabilidades(Integer id);
 
     // Obtener promedio de puntaje en una emergencia
     public List<Emergencia> getRankingAvg(Integer id);

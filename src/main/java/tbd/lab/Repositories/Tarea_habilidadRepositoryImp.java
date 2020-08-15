@@ -49,11 +49,11 @@ public class Tarea_habilidadRepositoryImp implements Tarea_habilidadRepository {
     @Override
     public String createTarea_habilidad(Tarea_habilidad tarea_habilidad)
     {
-        String sql = "INSERT INTO tarea_habilidad (id_habilidad, id_tarea) VALUES (:hab_id, :tar_id)";
+        String sql = "INSERT INTO tarea_habilidad (id_emeHabilidad, id_tarea) VALUES (:hab_id, :tar_id)";
         try (Connection conn = sql2o.open())
         {
             conn.createQuery(sql, true)
-                    .addParameter("hab_id", tarea_habilidad.getId_habilidad())
+                    .addParameter("hab_id", tarea_habilidad.getId_emeHabilidad())
                     .addParameter("tar_id", tarea_habilidad.getId_tarea())
                     .executeUpdate();
 
@@ -73,8 +73,8 @@ public class Tarea_habilidadRepositoryImp implements Tarea_habilidadRepository {
     {
         try (Connection conn = sql2o.open())
         {
-            return conn.createQuery("SELECT * FROM tarea_habilidad WHERE id = :tarea_habId")
-                    .addParameter("tarea_habId", id)
+            return conn.createQuery("SELECT * FROM tarea_habilidad WHERE id = :tarea_emeHabId")
+                    .addParameter("tarea_emeHabId", id)
                     .executeAndFetch(Tarea_habilidad.class).get(0);
         }
 
@@ -89,12 +89,12 @@ public class Tarea_habilidadRepositoryImp implements Tarea_habilidadRepository {
     @Override
     public String updateTarea_habilidad(Tarea_habilidad tarea_habilidad, Integer id)
     {
-        String sql = "UPDATE tarea_voluntario SET id_habilidad = :hab_id, id_tarea = :tar_id";
+        String sql = "UPDATE tarea_voluntario SET id_emehabilidad = :emeHab_id, id_tarea = :tar_id";
 
         try (Connection conn = sql2o.open())
         {
             conn.createQuery(sql)
-                    .addParameter("hab_id", tarea_habilidad.getId_habilidad())
+                    .addParameter("emeHab_id", tarea_habilidad.getId_emeHabilidad())
                     .addParameter("tar_id", tarea_habilidad.getId_tarea())
                     .executeUpdate();
 
@@ -114,8 +114,8 @@ public class Tarea_habilidadRepositoryImp implements Tarea_habilidadRepository {
     {
         try (Connection conn = sql2o.open())
         {
-            conn.createQuery("DELETE FROM tarea_habilidad WHERE id = :tar_habId")
-                    .addParameter("tar_habId", id)
+            conn.createQuery("DELETE FROM tarea_habilidad WHERE id = :tar_emeHabId")
+                    .addParameter("tar_emeHabId", id)
                     .executeUpdate();
 
             return "Tarea_habilidad eliminada con exito";
