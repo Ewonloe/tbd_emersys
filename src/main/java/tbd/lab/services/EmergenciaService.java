@@ -70,7 +70,7 @@ public class EmergenciaService {
     }
 
     @GetMapping("/emergencias/getMissingHabilidades/{id}")
-    public List<Habilidad> getMissingHabilidades(Integer id)
+    public List<Habilidad> getMissingHabilidades(@PathVariable(value= "id") Integer id)
     {
         return emerRepo.getMissingHabilidades(id);
     }
