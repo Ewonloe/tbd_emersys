@@ -140,9 +140,11 @@ public class TareaRepositoryImp implements TareaRepository{
     @Override
     public List<Habilidad> getHabilidades(Integer id)
     {
-        String sql = "SELECT * FROM habilidad WHERE id IN " +
-                "(SELECT id_habilidad FROM eme_habilidad WHERE id IN " +
-                "(SELECT id_emehab FROM tarea_habilidad WHERE id_tarea = :id))";
+        String sql = "SELECT habilidad.descrip, eme_habilidad.id " +
+                "FROM habilidad " +
+                "JOIN eme_habilidad ON habilidad.id = eme_habilidad.id_habilidad " +
+                "WHERE eme_habilidad.id IN " +
+                "(SELECT id_emehab FROM tarea_habilidad WHERE id_tarea = :id)";
 
         try (Connection conn = sql2o.open())
         {
@@ -161,9 +163,11 @@ public class TareaRepositoryImp implements TareaRepository{
     @Override
     public List<Habilidad> getMissingHabilidades(Integer id)
     {
-        String sql = "SELECT * FROM habilidad WHERE id IN " +
-                "(SELECT id_habilidad FROM eme_habilidad WHERE id NOT IN " +
-                "(SELECT id_emehab FROM tarea_habilidad WHERE id_tarea = :id))";
+        String sql = "SELECT habilidad.descrip, eme_habilidad.id " +
+                "FROM habilidad " +
+                "JOIN eme_habilidad ON habilidad.id = eme_habilidad.id_habilidad " +
+                "WHERE eme_habilidad.id NOT IN " +
+                "(SELECT id_emehab FROM tarea_habilidad WHERE id_tarea = :id)";
 
         try (Connection conn = sql2o.open())
         {
