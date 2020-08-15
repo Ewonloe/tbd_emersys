@@ -161,8 +161,8 @@ public class TareaRepositoryImp implements TareaRepository{
     @Override
     public List<Habilidad> getMissingHabilidades(Integer id)
     {
-        String sql = "SELECT * FROM habilidad WHERE id NOT IN " +
-                "(SELECT id_habilidad FROM eme_habilidad WHERE id IN " +
+        String sql = "SELECT * FROM habilidad WHERE id IN " +
+                "(SELECT id_habilidad FROM eme_habilidad WHERE id NOT IN " +
                 "(SELECT id_emehab FROM tarea_habilidad WHERE id_tarea = :id))";
 
         try (Connection conn = sql2o.open())
