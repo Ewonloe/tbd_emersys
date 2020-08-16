@@ -3,6 +3,7 @@ package tbd.lab.services;
 import org.springframework.web.bind.annotation.*;
 import tbd.lab.Models.Habilidad;
 import tbd.lab.Models.Tarea;
+import tbd.lab.Models.Voluntario;
 import tbd.lab.Repositories.TareaRepository;
 
 import java.util.List;
@@ -68,5 +69,10 @@ public class TareaService {
         return tarRepo.getMissingHabilidades(id);
     }
 
+    @GetMapping("/tareas/getUnsummoned/{id}")
+    public List<Voluntario> getUnsummoned(@PathVariable(value = "id") Integer id)
+    {
+        return tarRepo.getUnsummoned(id);
+    }
 
 }

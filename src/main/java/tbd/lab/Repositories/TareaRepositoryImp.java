@@ -6,6 +6,7 @@ import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 import tbd.lab.Models.Habilidad;
 import tbd.lab.Models.Tarea;
+import tbd.lab.Models.Voluntario;
 
 import java.net.Inet4Address;
 import java.util.List;
@@ -180,6 +181,26 @@ public class TareaRepositoryImp implements TareaRepository{
         {
             System.out.println(e.getMessage());
             return null;
+        }
+    }
+
+    @Override
+    public List<Voluntario> getUnsummoned(Integer id)
+    {
+        String sql = "SELECT * FROM voluntario WHERE id NOT IN (SELECT id_voluntario FROM ranking WHERE id_tarea = :id)";
+
+        try (Connection conn = sql2o.open())
+        {
+            return conn.createQuery(sql)
+                    .addParameter("id", id)
+                    .executeAndFetch(Voluntario.class);
+        }
+
+
+        catch (Exception e){
+
+            System.out.println(e.getMessage());
+                return null;
         }
     }
 }
