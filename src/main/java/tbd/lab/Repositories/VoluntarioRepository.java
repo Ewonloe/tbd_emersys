@@ -12,4 +12,5 @@ public interface VoluntarioRepository {
     public String updateVoluntario(Voluntario voluntario, Integer id);
     public String deleteVoluntario(Integer id);
     public List<Voluntario> getRankingBetween(Float minValue, Float maxValue);
+    public List<Voluntario> getVolWithName(String name);
 }

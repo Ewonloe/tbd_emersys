@@ -10,4 +10,5 @@ public interface RankingRepository {
     public Ranking getRanking(Integer id);
     public String updateRanking(Ranking ranking, Integer id);
     public String deleteRanking(Integer id);
+    public String updateRankingPoints(Ranking updateRanking, Integer id);
 }

@@ -128,5 +128,25 @@ public class RankingRepositoryImp implements RankingRepository{
         }
     }
 
-
+    @Override
+    public String updateRankingPoints(Ranking updateRanking, Integer id){
+        try(Connection conn = sql2o.open()){
+            conn.createQuery("UPDATE updateRanking " +
+                                            "SET puntaje = 100 *    (SELECT count(vh.id_habilidad) " +
+                                            "FROM ranking r, voluntario_habilidad vh, " +
+                                            "tarea_habilidad th, eme_habilidad eh " +
+                                            "WHERE r.id = :rankId" +
+                                            "r.id_voluntario = vh.id_voluntario " +
+                                            "AND vh.id_habilidad = eh.id_habilidad " +
+                                            "AND eh.id = th.id_emehab" +
+                                            "AND th.id_tarea = r.id_tarea) " +
+                                            "/ " +
+                                            "(SELECT  count(th.id_habilidad) " +
+                                            "FROM tarea_hablidad th, ranking r " +
+                                            "WHERE r.id_tarea = th.id_tarea")
+                                            .addParameter("rankId", id)
+                                            .executeUpdate();
+            return "Nuevo puntaje asignado con  exito";
+        }
+    }
 }

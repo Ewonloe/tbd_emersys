@@ -53,4 +53,10 @@ public class RankingService {
     {
         return rankRepo.deleteRanking(id);
     }
+
+    @PutMapping("/ranking/updatePoints/{id}")
+    @ResponseBody
+    public String updateRankingPoints(@RequestBody Ranking updateRanking, @PathVariable(value = "id") Integer id){
+        return rankRepo.updateRankingPoints(updateRanking, id);
+    }
 }

@@ -148,4 +148,19 @@ public class VoluntarioRepositoryImp implements VoluntarioRepository{
         }
     }
 
+    @Override
+    public List<Voluntario> getVolWithName(String name){
+        try(Connection conn = sql2o.open()){
+            return conn.createQuery("SELECT *" +
+                                                "FROM voluntario" +
+                                                "WHERE nombre = :name")
+                                    .addParameter("name", name)
+                                    .executeAndFetch(Voluntario.class);
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
+
 }
