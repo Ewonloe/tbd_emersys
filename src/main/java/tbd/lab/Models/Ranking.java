@@ -13,27 +13,35 @@ public class Ranking {
     public BigDecimal getId() {
         return id;
     }
+
     public void setId(BigDecimal id){
         this.id=id;
     }
+
     public int getPuntaje(){
         return puntaje;
     }
+
     public void setPuntaje(int puntaje){
         this.puntaje=puntaje;
     }
+
     public int getFlg_invitado(){
         return flg_invitado;
     }
+
     public void setFlg_invitado(int flg_invitado){
         this.flg_invitado=flg_invitado;
     }
+
     public int getFlg_participa(){
         return flg_invitado;
     }
+
     public void setFlg_participa(int flg_participa){
         this.flg_participa=flg_participa;
     }
+
     public BigDecimal getId_voluntario(){
         return id_voluntario;
     }
@@ -45,6 +53,7 @@ public class Ranking {
     public BigDecimal getId_tarea() {
         return id_tarea;
     }
+
     public void setId_tarea(BigDecimal id_tarea) {
         this.id_tarea = id_tarea;
     }

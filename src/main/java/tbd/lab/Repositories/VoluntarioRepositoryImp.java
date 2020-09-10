@@ -35,7 +35,7 @@ public class VoluntarioRepositoryImp implements VoluntarioRepository{
     {
         try(Connection conn = sql2o.open())
         {
-            return conn.createQuery("SELECT * FROM voluntario").executeAndFetch(Voluntario.class);
+            return conn.createQuery("SELECT id, nombre, fnacimiento, st_x(st_astext(ubicacion)) AS longitud, st_y(st_astext(ubicacion)) AS latitud FROM voluntario").executeAndFetch(Voluntario.class);
         }
 
         catch (Exception e)
@@ -48,12 +48,15 @@ public class VoluntarioRepositoryImp implements VoluntarioRepository{
     @Override
     public String createVoluntario(Voluntario voluntario)
     {
-        String sql = "INSERT INTO voluntario (nombre, fnacimiento) VALUES (:volName, :volFnac)";
+        String sql = "INSERT INTO voluntario (nombre, fnacimiento, ubicacion) VALUES (:volName, :volFnac, ST_GeomFromText(:volUbi, 4326))";
+        String ubi = "POINT("+voluntario.getLongitud()+" "+voluntario.getLatitud()+")";
+
         try (Connection conn = sql2o.open())
         {
             conn.createQuery(sql, true)
                     .addParameter("volName", voluntario.getNombre())
                     .addParameter("volFnac", voluntario.getFnacimiento())
+                    .addParameter("volUbi", ubi)
                     .executeUpdate();
 
             return "Voluntario creado con exito";
@@ -71,7 +74,7 @@ public class VoluntarioRepositoryImp implements VoluntarioRepository{
     {
         try (Connection conn = sql2o.open())
         {
-            return conn.createQuery("SELECT * from voluntario WHERE id = :volId")
+            return conn.createQuery("SELECT id, nombre, fnacimiento, st_x(st_astext(ubicacion)) AS longitud, st_y(st_astext(ubicacion)) AS latitud FROM voluntario WHERE id = :volId")
                     .addParameter("volId", id)
                     .executeAndFetch(Voluntario.class).get(0);
         }
@@ -87,11 +90,13 @@ public class VoluntarioRepositoryImp implements VoluntarioRepository{
     @Override
     public String updateVoluntario(Voluntario voluntario, Integer id)
     {
+        String ubi = "POINT("+voluntario.getLongitud()+" "+voluntario.getLatitud()+")";
         try (Connection conn = sql2o.open())
         {
-            conn.createQuery("UPDATE voluntario SET nombre = :volNombre, fnacimiento = :volFnac WHERE id = :volId")
+            conn.createQuery("UPDATE voluntario SET nombre = :volNombre, fnacimiento = :volFnac, ubicacion = ST_GeomFromText(:volUbi, 4326) WHERE id = :volId")
                     .addParameter("volNombre", voluntario.getNombre())
                     .addParameter("volFnac", voluntario.getFnacimiento())
+                    .addParameter("volUbi", ubi)
                     .addParameter("volId", id)
                     .executeUpdate();
 
@@ -158,6 +163,29 @@ public class VoluntarioRepositoryImp implements VoluntarioRepository{
                                     .executeAndFetch(Voluntario.class);
         }
         catch(Exception e){
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
+
+    @Override
+    public List<Voluntario> getAllVoluntarioInArea(Integer cod_reg)
+    {
+        try(Connection conn = sql2o.open())
+        {
+            String sql = "SELECT id, nombre, fnacimiento, st_x(st_astext(ubicacion)) AS longitud, st_y(st_astext(ubicacion)) AS latitud " +
+                    "FROM voluntario as v " +
+                    "INNER JOIN division_regional as dr " +
+                    "ON ST_WITHIN(v.ubicacion, dr.geom) " +
+                    "WHERE dr.cod_regi = :cod_reg";
+
+            return conn.createQuery(sql)
+                    .addParameter("cod_reg", cod_reg)
+                    .executeAndFetch(Voluntario.class);
+        }
+
+        catch(Exception e)
+        {
             System.out.println(e.getMessage());
             return null;
         }

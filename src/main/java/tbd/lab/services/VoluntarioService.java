@@ -61,6 +61,12 @@ public class VoluntarioService {
     public List<Voluntario> getRankingBetween(@PathVariable(value = "minValue") Float minValue, @PathVariable(value = "maxValue") Float maxValue)
     {return volRepo.getRankingBetween(minValue, maxValue);}
 
+    @GetMapping("/voluntarios/getAllWithin/{cod_reg}")
+    public List<Voluntario> getAllVoluntarioWithin(@PathVariable(value = "cod_reg") int cod_reg)
+    {
+        return volRepo.getAllVoluntarioInArea(cod_reg);
+    }
+
     @GetMapping("/voluntarios/getVolWithName/{name}")
     public List<Voluntario> getVolWithName(@PathVariable(value = "name") String name){
         return volRepo.getVolWithName(name);
